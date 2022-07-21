@@ -1,10 +1,10 @@
-import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:projeto_receitas/screens/categories_meals_screen.dart';
 import 'package:projeto_receitas/screens/categories_screen.dart';
 import 'utils/app_routes.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: CategoriesScreen(),
+     
       routes: {
-        AppRoutes.HOME:(ctx)=> CategoriesMealsScreen(),
-        AppRoutes.CATEGORIES_MEALS:(ctx)=> CategoriesMealsScreen()
+        AppRoutes.HOME:(ctx)=> const CategoriesScreen(),
+        AppRoutes.CATEGORIES_MEALS:(ctx)=> const CategoriesMealsScreen()
       },
     );
   }

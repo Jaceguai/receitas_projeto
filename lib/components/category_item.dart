@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_receitas/utils/app_routes.dart';
 import "../models/category.dart";
-import "../screens/categories_meals_screen.dart";
 
 class CategoryItem extends StatelessWidget {
   final Category category;
@@ -8,7 +8,7 @@ class CategoryItem extends StatelessWidget {
 
   void _selectCategory(BuildContext context) {
     Navigator.of(context).pushNamed(
-      "/categories-meals",
+     AppRoutes.CATEGORIES_MEALS ,
       arguments: category,
     );
   }
@@ -20,8 +20,8 @@ class CategoryItem extends StatelessWidget {
       onTap: () => _selectCategory(context),
       splashColor: Theme.of(context).colorScheme.primary,
       child: Container(
-        padding: EdgeInsets.all(5),
-        child: Text(
+        padding: const EdgeInsets.all(5),
+        child:  Text(
           category.title,
           style: Theme.of(context).textTheme.headline6,
         ),

@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 class MealDetailSreen extends StatelessWidget {
-  const MealDetailSreen({Key? key}) : super(key: key);
+  final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
+  const MealDetailSreen({Key? key,
+  required this.onToggleFavorite,
+  required this.isFavorite,
+  }) : super(key: key);
+ 
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -80,19 +86,23 @@ class MealDetailSreen extends StatelessWidget {
                       const Divider(
                         color: Colors.grey,
                       )
-                    ],
+                    ]
                   );
                 },
               ),
+              
             )
           ],
         ),
       ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.of(context).pop();
+          onToggleFavorite(meal);
         },
-        child: Icon(Icons.star),
+        child: Icon(
+          color:Colors.pink,
+          isFavorite(meal)? Icons.star : Icons.star_border),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_receitas/screens/categories_meals_screen.dart';
 import 'package:projeto_receitas/screens/meal_detail_screen.dart';
+import 'package:projeto_receitas/screens/splash_page/splash_page.dart';
 import 'utils/app_routes.dart';
 import "./screens/tabs_screen.dart";
 import "./screens/settings_screen.dart";
@@ -20,7 +21,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Settings settings = Settings();
   List<Meal> _availableMeals = dummyMeals;
-  List<Meal> _favoriteMeals = [];
+  final List<Meal> _favoriteMeals = [];
 
   void _filterMeals(Settings settings) {
     setState(() {
@@ -47,9 +48,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  bool _isFavorite(Meal meal){
+  bool _isFavorite(Meal meal) {
     return _favoriteMeals.contains(meal);
-
   }
 
   @override
@@ -76,9 +76,12 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       routes: {
+        AppRoutes.SPLASH_PAGE: (ctx) => const SplashPage(),
         AppRoutes.HOME: (ctx) => TabsScreen(favoriteMeals: _favoriteMeals),
-        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(meals: _availableMeals),
-        AppRoutes.MEALS_DETAIL: (ctx) =>  MealDetailSreen(onToggleFavorite:_toggleFavorite, isFavorite: _isFavorite),
+        AppRoutes.CATEGORIES_MEALS: (ctx) =>
+            CategoriesMealsScreen(meals: _availableMeals),
+        AppRoutes.MEALS_DETAIL: (ctx) => MealDetailSreen(
+            onToggleFavorite: _toggleFavorite, isFavorite: _isFavorite),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(
               onSettingsChanged: _filterMeals,
               settings: settings,

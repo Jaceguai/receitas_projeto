@@ -19,10 +19,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late Settings settings;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     settings = widget.settings;
-
   }
 
   Widget _createSwitch(
@@ -49,13 +48,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Configurações"),
+        title: const Text("Configurações"),
       ),
       drawer: const MainDrawer(),
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(
               "Filtros",
               style: Theme.of(context).textTheme.headline6,

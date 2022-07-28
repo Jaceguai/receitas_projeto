@@ -5,11 +5,12 @@ import '../models/meal.dart';
 class MealDetailSreen extends StatelessWidget {
   final Function(Meal) onToggleFavorite;
   final bool Function(Meal) isFavorite;
-  const MealDetailSreen({Key? key,
-  required this.onToggleFavorite,
-  required this.isFavorite,
+  const MealDetailSreen({
+    Key? key,
+    required this.onToggleFavorite,
+    required this.isFavorite,
   }) : super(key: key);
- 
+
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -47,7 +48,16 @@ class MealDetailSreen extends StatelessWidget {
             SizedBox(
               height: 300,
               width: double.infinity,
-              child: Image.network(meal.imageUrl, fit: BoxFit.cover),
+              child: Image.network(
+                meal.imageUrl,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(child: Text("Loading..."));
+                },
+                errorBuilder: (context, error, stackTrace) =>
+                    const Text("Error"),
+              ),
             ),
             _createSectionTitle(context, "Ingredientes"),
             _createSectionContainer(
@@ -72,37 +82,32 @@ class MealDetailSreen extends StatelessWidget {
               ListView.builder(
                 itemCount: meal.steps.length,
                 itemBuilder: (ctx, index) {
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          child: Text("${index + 1}",
-                              style: const TextStyle(color: Colors.white)),
-                        ),
-                        title: Text(meal.steps[index]),
+                  return Column(children: [
+                    ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: Text("${index + 1}",
+                            style: const TextStyle(color: Colors.white)),
                       ),
-                      const Divider(
-                        color: Colors.grey,
-                      )
-                    ]
-                  );
+                      title: Text(meal.steps[index]),
+                    ),
+                    const Divider(
+                      color: Colors.grey,
+                    )
+                  ]);
                 },
               ),
-              
             )
           ],
         ),
       ),
-      
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           onToggleFavorite(meal);
         },
         child: Icon(
-          color:Colors.pink,
-          isFavorite(meal)? Icons.star : Icons.star_border),
+            color: Colors.pink,
+            isFavorite(meal) ? Icons.star : Icons.star_border),
       ),
     );
   }

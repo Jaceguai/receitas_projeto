@@ -25,7 +25,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor:Color.fromARGB(255, 253, 251, 243),
+      backgroundColor: const Color.fromARGB(255, 253, 251, 243),
       child: Column(
         children: [
           Container(
@@ -52,7 +52,8 @@ class MainDrawer extends StatelessWidget {
           _createItem(
             Icons.settings,
             "Configurações",
-            () => Navigator.of(context).pushReplacementNamed(AppRoutes.SETTINGS),
+            () =>
+                Navigator.of(context).pushReplacementNamed(AppRoutes.SETTINGS),
           ),
         ],
       ),

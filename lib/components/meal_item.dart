@@ -8,15 +8,13 @@ class MealItem extends StatelessWidget {
   const MealItem({Key? key, required this.meal}) : super(key: key);
 
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.MEALS_DETAIL,
-    arguments: meal);
-    
+    Navigator.of(context).pushNamed(AppRoutes.MEALS_DETAIL, arguments: meal);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> _selectCategory(context),
+      onTap: () => _selectCategory(context),
       child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -31,8 +29,21 @@ class MealItem extends StatelessWidget {
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15)),
-                    child: Image.network(meal.imageUrl,
-                        height: 250, width: double.infinity, fit: BoxFit.cover),
+                    child: Image.network(
+                      meal.imageUrl,
+                      height: 250,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const Center(
+                            child: LinearProgressIndicator(
+                          backgroundColor: Colors.pink,
+                        ));
+                      },
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Text("Error"),
+                    ),
                   ),
                   Positioned(
                     bottom: 5,
@@ -64,22 +75,22 @@ class MealItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                       const Icon(Icons.schedule),
+                        const Icon(Icons.schedule),
                         const SizedBox(width: 6),
                         Text("${meal.duration} min")
                       ],
                     ),
                     Row(
                       children: [
-                      const  Icon(Icons.work),
-                     const   SizedBox(width: 6),
+                        const Icon(Icons.work),
+                        const SizedBox(width: 6),
                         Text(meal.complexityText)
                       ],
                     ),
                     Row(
                       children: [
-                      const  Icon(Icons.attach_money),
-                      const  SizedBox(width: 6),
+                        const Icon(Icons.attach_money),
+                        const SizedBox(width: 6),
                         Text(meal.costText)
                       ],
                     ),

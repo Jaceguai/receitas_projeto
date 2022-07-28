@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_receitas/components/main_drawer.dart';
 import 'package:projeto_receitas/screens/categories_screen.dart';
-import "categories_meals_screen.dart";
 import "favorite_screen.dart";
 import "../models/meal.dart";
 
@@ -21,7 +20,7 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     super.initState();
     _screens = [
-      CategoriesScreen(),
+      const CategoriesScreen(),
       FavoriteScreen(favoriteMeals: widget.favoriteMeals)
     ];
   }
